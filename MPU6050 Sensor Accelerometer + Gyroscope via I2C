@@ -1,0 +1,53 @@
+#include "I2Cdev.h"
+#include "MPU6050.h"
+#include <Wire.h>
+
+MPU6050 mpu;
+
+int16_t ax, ay, az;
+int16_t gx, gy, gz;
+bool blinkState = false;
+
+void setup() {
+  Serial.begin(9600);
+  Wire.begin();
+
+  Serial.println("Initializing MPU...");
+  mpu.initialize();
+
+  if (!mpu.testConnection()) {
+    Serial.println("MPU6050 connection failed");
+    while (1);
+  } else {
+    Serial.println("MPU6050 connection successful");
+  }
+
+  // Optionally set offsets here if needed
+  mpu.setXAccelOffset(0);
+  mpu.setYAccelOffset(0);
+  mpu.setZAccelOffset(0);
+  mpu.setXGyroOffset(0);
+  mpu.setYGyroOffset(0);
+  mpu.setZGyroOffset(0);
+
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+  Serial.print("Accel: ");
+  Serial.print(ax); Serial.print("\t");
+  Serial.print(ay); Serial.print("\t");
+  Serial.print(az); Serial.print("\t");
+
+  Serial.print("Gyro: ");
+  Serial.print(gx); Serial.print("\t");
+  Serial.print(gy); Serial.print("\t");
+  Serial.println(gz);
+
+  blinkState = !blinkState;
+  digitalWrite(LED_BUILTIN, blinkState);
+
+  delay(500);
+}
