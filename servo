@@ -1,0 +1,133 @@
+#include <Servo.h>
+
+// Servo objects
+Servo frontDoor; 
+Servo backDoor;
+Servo bunkDoor1;
+Servo bunkDoor2;
+Servo mainGate;
+Servo hillGate;
+
+void setup() {
+  // Attach servos to pins
+  frontDoor.attach(3);
+  backDoor.attach(5);
+  mainGate.attach(2);
+  bunkDoor1.attach(6);  // Assign pins as needed
+  bunkDoor2.attach(7);
+  hillGate.attach(8);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Example sequence: open and close each servo one by one
+
+  Serial.println("Opening Front Door");
+  FrontDoorOpen();
+  delay(2000);
+  Serial.println("Closing Front Door");
+  FrontDoorClose();
+  delay(2000);
+
+  Serial.println("Opening Back Door");
+  BackDoorOpen();
+  delay(2000);
+  Serial.println("Closing Back Door");
+  BackDoorClose();
+  delay(2000);
+
+  Serial.println("Opening Bunk Door 1");
+  BunkDoor1Open();
+  delay(2000);
+  Serial.println("Closing Bunk Door 1");
+  BunkDoor1Close();
+  delay(2000);
+
+  Serial.println("Opening Bunk Door 2");
+  BunkDoor2Open();
+  delay(2000);
+  Serial.println("Closing Bunk Door 2");
+  BunkDoor2Close();
+  delay(2000);
+
+  Serial.println("Opening Main Gate");
+  MainGateOpen();
+  delay(2000);
+  Serial.println("Closing Main Gate");
+  MainGateClose();
+  delay(2000);
+
+  Serial.println("Opening Hill Gate");
+  HillGateOpen();
+  delay(2000);
+  Serial.println("Closing Hill Gate");
+  HillGateClose();
+  delay(2000);
+}
+
+// Functions to control Front Door servo
+void FrontDoorOpen() {
+  frontDoor.write(0);    // Adjust angle as needed
+  delay(4000);
+}
+
+void FrontDoorClose() {
+  frontDoor.write(90);   // Adjust angle as needed
+  delay(4000);
+}
+
+// Functions to control Back Door servo
+void BackDoorOpen() {
+  backDoor.write(0);
+  delay(4000);
+}
+
+void BackDoorClose() {
+  backDoor.write(90);
+  delay(4000);
+}
+
+// Functions to control Bunk Door 1 servo
+void BunkDoor1Open() {
+  bunkDoor1.write(0);
+  delay(4000);
+}
+
+void BunkDoor1Close() {
+  bunkDoor1.write(90);
+  delay(4000);
+}
+
+// Functions to control Bunk Door 2 servo
+void BunkDoor2Open() {
+  bunkDoor2.write(0);
+  delay(4000);
+}
+
+void BunkDoor2Close() {
+  bunkDoor2.write(90);
+  delay(4000);
+}
+
+// Functions to control Main Gate servo
+void MainGateOpen() {
+  mainGate.write(180);
+  delay(4000);
+}
+
+void MainGateClose() {
+  mainGate.write(90);
+  delay(4000);
+}
+
+// Functions to control Hill Gate servo
+void HillGateOpen() {
+  hillGate.write(0);
+  delay(4000);
+}
+
+void HillGateClose() {
+  hillGate.write(90);
+  delay(4000);
+}
